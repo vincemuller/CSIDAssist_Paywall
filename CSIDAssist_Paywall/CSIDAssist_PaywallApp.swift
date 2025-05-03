@@ -11,7 +11,7 @@ import SwiftUI
 struct CSIDAssist_PaywallApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DashboardScreen()
         }
     }
 }
