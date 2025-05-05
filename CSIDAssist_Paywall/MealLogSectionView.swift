@@ -15,7 +15,7 @@ struct MealLogSectionView: View {
         HStack {
             Text(title)
                 .font(.system(size: 25, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(.white.opacity(0.1))
             Spacer()
         }
         .padding(.horizontal, 10)
@@ -35,10 +35,12 @@ struct MealLogSectionView: View {
                             }
                         Text(meal.label)
                             .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(Color.white)
                     }
                 }
             })
             .padding(.horizontal)
+            .opacity(0.1)
         }
         .padding(.bottom, 10)
     }
