@@ -73,9 +73,15 @@ struct DashboardScreen: View {
                 .ignoresSafeArea()
         }
         .sheet(isPresented: $paywallPresenting) {
-            ProductView(id: storeKit.subscriptionID.first!, prefersPromotionalIcon: true)
+            ProductView(id: storeKit.subscriptionID.first!, icon: {
+                Image(.icon)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .mask {
+                        RoundedRectangle(cornerRadius: 20)
+                    }
+            })
                 .productViewStyle(.large)
-            SubscriptionStoreView(groupID: storeKit.groupID)
         }
     }
     

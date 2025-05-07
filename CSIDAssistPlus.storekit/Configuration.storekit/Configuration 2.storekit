@@ -74,7 +74,7 @@
       "localizations" : [
 
       ],
-      "name" : "CSIDAssistPlus",
+      "name" : "CSIDAssist+",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -94,15 +94,14 @@
           },
           "localizations" : [
             {
-              "description" : "CSIDAssist Plus",
-              "displayName" : "CSIDAssist Plus",
+              "description" : "Premium features subscription",
+              "displayName" : "CSIDAssist+",
               "locale" : "en_US"
             }
           ],
           "productID" : "csidassistplus",
-          "promotionalImageID" : "DAD4353E",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "CSIDAssistPlus",
+          "referenceName" : "CSIDAssist+",
           "subscriptionGroupID" : "1D704DF4",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
