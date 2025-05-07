@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct DashboardScreen: View {
+    
+    @StateObject private var storeKit = StoreKitManager()
     
     @State var searchText: String = ""
     @State var paywallPresenting: Bool = false
@@ -70,7 +73,9 @@ struct DashboardScreen: View {
                 .ignoresSafeArea()
         }
         .sheet(isPresented: $paywallPresenting) {
-            Text("Paywall Content Goes Her")
+            ProductView(id: storeKit.subscriptionID.first!, prefersPromotionalIcon: true)
+                .productViewStyle(.large)
+            SubscriptionStoreView(groupID: storeKit.groupID)
         }
     }
     

@@ -16,6 +16,11 @@
 			path = CSIDAssist_Paywall;
 			sourceTree = "<group>";
 		};
+		EBACE1452DCA6A7300343106 /* CSIDAssistPlus.storekit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CSIDAssistPlus.storekit;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +37,7 @@
 		EB7318972DC5C7DE00829069 = {
 			isa = PBXGroup;
 			children = (
+				EBACE1452DCA6A7300343106 /* CSIDAssistPlus.storekit */,
 				EB7318A22DC5C7DE00829069 /* CSIDAssist_Paywall */,
 				EB7318A12DC5C7DE00829069 /* Products */,
 			);
@@ -62,6 +68,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				EB7318A22DC5C7DE00829069 /* CSIDAssist_Paywall */,
+				EBACE1452DCA6A7300343106 /* CSIDAssistPlus.storekit */,
 			);
 			name = CSIDAssist_Paywall;
 			packageProductDependencies = (
