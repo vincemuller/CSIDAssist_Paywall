@@ -12,31 +12,34 @@ struct PaywallScreen: View {
     @State private var secondReviewOffset = -300.0
     @State private var thirdReviewOffset = 300.0
     
-    @State private var showRows: [Bool] = Array(repeating: false, count: 4)
+    @State private var showRows: [Bool] = Array(repeating: false, count: 5)
     
     private let features: [(icon: String, title: String, iconColor: Color)] = [
         ("fork.knife", "Custom Meals", .iconTeal),
         ("pencil.and.list.clipboard", "Meal Logging", .iconOrange),
-        ("chart.bar.xaxis", "CSID Threshold Management", .iconRed),
-        ("folder", "Saved Lists", .iconBlue)
+        ("chart.bar.xaxis", "Sugar & Starch Tracking", .iconRed),
+        ("folder", "Saved Lists", .iconBlue),
+        ("figure.2.and.child.holdinghands", "Family Sharing", .iconOrange)
     ]
 
     var body: some View {
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
         
         VStack (alignment: .leading) {
             ScrollView {
                 Image(.icon)
                     .resizable()
-                    .frame(height: 400)
+                    .frame(height: height * 0.4)
                     .scaledToFit()
                 HStack {
                     Text("More Features, Less Guesswork")
-                        .font(.system(size: 24, weight: .bold))
+                        .font(.system(size: width * 0.057, weight: .bold))
                     Spacer()
                 }
                 .padding(.horizontal)
-                .padding(.top, 20)
-                .padding(.bottom, 5)
+                .padding(.top, height * 0.022)
+                .padding(.bottom, height * 0.0057)
                 HStack {
                     Text("Helping you feel in control, every step of the way")
                         .font(.system(size: 14, weight: .semibold))
@@ -44,14 +47,16 @@ struct PaywallScreen: View {
                     Spacer()
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding(.bottom, height * 0.022)
                 
                 ForEach(features.indices, id: \.self) { index in
                     FeatureRow(icon: features[index].icon,
                                title: features[index].title,
                                iconColor: features[index].iconColor)
+                    .frame(width: width * 0.87, alignment: .leading)
+                    .padding(.vertical, 1)
                         .opacity(showRows[index] ? 1 : 0)
-                        .offset(x: showRows[index] ? 0 : -100)
+                        .offset(x: showRows[index] ? 0 : -(width * 0.2487))
                         .animation(.easeOut(duration: 0.4).delay(Double(index) * 0.25), value: showRows[index])
                 }
                 
@@ -68,88 +73,90 @@ struct PaywallScreen: View {
                                 .font(.system(size: 12))
                             Spacer()
                         }
-                        .padding(10)
+                        .padding(width * 0.0248)
                     }
-                    .frame(width: 300, height: 120)
+                    .frame(width: width * 0.746, height: height * 0.137)
                     .offset(x: firstReviewOffset)
                 }
-                .padding(.top, 30)
-                .padding(.bottom, 10)
+                .padding(.top, height * 0.034)
+                .padding(.bottom, height * 0.0114)
                 
                 HStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white.opacity(0.1))
-                            .frame(width: 300, height: 80)
+                            .frame(width: width * 0.746, height: height * 0.091)
                             .offset(x: secondReviewOffset)
                     }
                     Spacer()
                 }
-                .padding(.vertical, 10)
+                .padding(.vertical, height * 0.0114)
                 
                 HStack {
                     Spacer()
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white.opacity(0.1))
-                            .frame(width: 300, height: 120)
+                            .frame(width: width * 0.746, height: height * 0.137)
                             .offset(x: thirdReviewOffset)
                     }
                 }
-                .padding(.vertical, 10)
+                .padding(.vertical, height * 0.0114)
                 
                 VStack {
                 }
-                .frame(height: 200)
+                .frame(height: height * 0.228)
             }
             .onScrollGeometryChange(for: Double.self) { geo in
                 geo.contentOffset.y
             } action: { oldValue, newValue in
                 print(newValue)
-                if newValue > 100 {
+                if newValue > (height * 0.114) {
                     withAnimation (.easeIn) {
-                        firstReviewOffset = -25
+                        firstReviewOffset = -(width * 0.062)
                     }
                 }
                 
-                if newValue > 220 {
+                if newValue > (height * 0.251) {
                     withAnimation {
-                        secondReviewOffset = 25
+                        secondReviewOffset = (width * 0.062)
                     }
                 }
                 
-                if newValue > 370 {
+                if newValue > (height * 0.423) {
                     withAnimation {
-                        thirdReviewOffset = -25
+                        thirdReviewOffset = -(width * 0.062)
                     }
                 }
             }
         }
         .ignoresSafeArea()
-        .background {
-            LinearGradient(colors: [.backgroundColor1,.backgroundColor2,.backgroundColor1], startPoint: .topLeading, endPoint: .bottomTrailing)
-                .ignoresSafeArea()
-                .opacity(0.5)
-        }
+        .background(Color.black)
         .overlay(alignment: .bottom, content: {
-            VStack {
-                Text("Get full access for just $4.99/month")
-                    .font(.system(size: 14))
-                Text("Continue")
-                    .foregroundStyle(Color.white)
-                    .font(.system(size: 18, weight: .semibold))
-                    .frame(width: 300, height: 50)
-                    .background {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.iconTeal)
-                    }
-                Text("All Plans | Restore | Terms and Conditions | Privacy")
-                    .font(.system(size: 10))
-                    .padding(.top, 5)
+            ZStack {
+                VStack {
+                    Text("Get full access for just $4.99/month")
+                        .font(.system(size: 14))
+                    Text("Continue")
+                        .foregroundStyle(Color.white)
+                        .font(.system(size: 18, weight: .semibold))
+                        .frame(width: width * 0.746, height: height * 0.057)
+                        .background {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.iconTeal)
+                        }
+                    Text("All Plans | Restore | Terms and Conditions | Privacy")
+                        .font(.system(size: 10))
+                        .padding(.top, 5)
+                }
+                .padding()
             }
-            .padding()
+            .frame(width: width)
+            .background(Color.black)
         })
         .onAppear {
+            print(UIScreen.main.bounds.width)
+            print(UIScreen.main.bounds.height)
             for i in showRows.indices {
                 DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
                     showRows[i] = true
@@ -177,10 +184,9 @@ struct FeatureRow: View {
                 .padding(.horizontal, 10)
                 .transition(.slide)
             Text(title)
-                    .font(.title3)
+                .font(.system(size: 16))
                     .foregroundColor(.white)
                     .frame(height: 35)
         }
-        .frame(width: 350, height: 35, alignment: .leadingLastTextBaseline)
     }
 }
