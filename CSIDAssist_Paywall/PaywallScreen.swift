@@ -14,6 +14,8 @@ struct PaywallScreen: View {
     
     @State private var showRows: [Bool] = Array(repeating: false, count: 5)
     
+    @Binding var paywallPresenting: Bool
+    
     private let features: [(icon: String, title: String, iconColor: Color)] = [
         ("fork.knife", "Custom Meals", .iconTeal),
         ("pencil.and.list.clipboard", "Meal Logging", .iconOrange),
@@ -28,27 +30,29 @@ struct PaywallScreen: View {
         
         VStack (alignment: .leading) {
             ScrollView {
-                Image(.icon)
-                    .resizable()
-                    .frame(height: height * 0.4)
-                    .scaledToFit()
+                ZStack (alignment: .topTrailing) {
+                    Image(.paywallBanner)
+                        .resizable()
+                        .scaledToFill()
+                    Button {
+                        withAnimation(.easeInOut) {
+                            paywallPresenting = false
+                        }
+                    } label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(Color.white)
+                            .padding(30)
+                            .ignoresSafeArea()
+                    }
+                }
                 HStack {
                     Text("More Features, Less Guesswork")
                         .font(.system(size: width * 0.057, weight: .bold))
                     Spacer()
                 }
                 .padding(.horizontal)
-                .padding(.top, height * 0.022)
-                .padding(.bottom, height * 0.0057)
-                HStack {
-                    Text("Helping you feel in control, every step of the way")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.white.opacity(0.5))
-                    Spacer()
-                }
-                .padding(.horizontal)
-                .padding(.bottom, height * 0.022)
-                
+                .padding(.vertical, height * 0.022)
                 ForEach(features.indices, id: \.self) { index in
                     FeatureRow(icon: features[index].icon,
                                title: features[index].title,
@@ -66,42 +70,83 @@ struct PaywallScreen: View {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white.opacity(0.1))
                         VStack (alignment: .leading) {
-                            Text("Jonathan C.")
+                            Text("Stacy L.")
                                 .foregroundStyle(Color.white.opacity(0.5))
                                 .font(.system(size: 10))
+                            HStack (spacing: 1) {
+                                ForEach((1...5), id: \.self) {_ in
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 10))
+                                        .foregroundStyle(.yellow)
+                                }
+                            }
+                            .padding(.vertical, 1)
                             Text("Thank you so much for developing this app!! It is easy to use. The information is clear, easy to read and extremely helpful. This will make my life so much easier. Thank you!!!")
                                 .font(.system(size: 12))
                             Spacer()
                         }
                         .padding(width * 0.0248)
                     }
-                    .frame(width: width * 0.746, height: height * 0.137)
+                    .frame(width: width * 0.746, height: height * 0.15)
                     .offset(x: firstReviewOffset)
                 }
-                .padding(.top, height * 0.034)
-                .padding(.bottom, height * 0.0114)
+                .padding(.vertical, height * 0.01)
                 
                 HStack {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white.opacity(0.1))
-                            .frame(width: width * 0.746, height: height * 0.091)
-                            .offset(x: secondReviewOffset)
+                        VStack (alignment: .leading) {
+                            Text("Melissa E.")
+                                .foregroundStyle(Color.white.opacity(0.5))
+                                .font(.system(size: 10))
+                            HStack (spacing: 1) {
+                                ForEach((1...5), id: \.self) {_ in
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 10))
+                                        .foregroundStyle(.yellow)
+                                }
+                            }
+                            .padding(.vertical, 1)
+                            Text("CSIDAssist has completely changed how we manage our child’s CSID. The meal tracking feature helps us log everything they eat, and over time we’ve noticed patterns between certain foods and symptoms. It’s like having a food detective in our pocket!")
+                                .font(.system(size: 12))
+                            Spacer()
+                        }
+                        .padding(width * 0.0248)
                     }
+                    .frame(width: width * 0.746, height: height * 0.18)
+                    .offset(x: secondReviewOffset)
                     Spacer()
                 }
-                .padding(.vertical, height * 0.0114)
+                .padding(.vertical, height * 0.01)
                 
                 HStack {
                     Spacer()
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color.white.opacity(0.1))
-                            .frame(width: width * 0.746, height: height * 0.137)
-                            .offset(x: thirdReviewOffset)
+                        VStack (alignment: .leading) {
+                            Text("Jonathan C.")
+                                .foregroundStyle(Color.white.opacity(0.5))
+                                .font(.system(size: 10))
+                            HStack (spacing: 1) {
+                                ForEach((1...5), id: \.self) {_ in
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 10))
+                                        .foregroundStyle(.yellow)
+                                }
+                            }
+                            .padding(.vertical, 1)
+                            Text("I love how intuitive the app is. Logging meals doesn’t feel like a chore, and seeing everything laid out helps me plan better. I’ve also started using it to prep weekly grocery lists based on what’s worked well. The benefits of consistent meal tracking have been more than I expected.")
+                                .font(.system(size: 12))
+                            Spacer()
+                        }
+                        .padding(width * 0.0248)
                     }
+                    .frame(width: width * 0.746, height: height * 0.18)
+                    .offset(x: thirdReviewOffset)
                 }
-                .padding(.vertical, height * 0.0114)
+                .padding(.vertical, height * 0.01)
                 
                 VStack {
                 }
@@ -155,8 +200,6 @@ struct PaywallScreen: View {
             .background(Color.black)
         })
         .onAppear {
-            print(UIScreen.main.bounds.width)
-            print(UIScreen.main.bounds.height)
             for i in showRows.indices {
                 DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
                     showRows[i] = true
@@ -167,7 +210,7 @@ struct PaywallScreen: View {
 }
 
 #Preview {
-    PaywallScreen()
+    PaywallScreen(paywallPresenting: .constant(true))
 }
 
 struct FeatureRow: View {
