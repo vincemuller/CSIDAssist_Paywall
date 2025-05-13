@@ -9,7 +9,7 @@
       }
     ]
   },
-  "identifier" : "F63AD5FF",
+  "identifier" : "FB30548B",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -18,8 +18,6 @@
   ],
   "settings" : {
     "_failTransactionsEnabled" : false,
-    "_locale" : "en_US",
-    "_storefront" : "USA",
     "_storeKitErrors" : [
       {
         "current" : null,
@@ -70,11 +68,11 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "1D704DF4",
+      "id" : "FA5967D2",
       "localizations" : [
 
       ],
-      "name" : "CSIDAssist+",
+      "name" : "csidassistplus",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -86,23 +84,23 @@
           "displayPrice" : "4.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "AAF2CACD",
+          "internalID" : "0D9EC270",
           "introductoryOffer" : {
-            "internalID" : "3ABDD249",
+            "internalID" : "4C16C30E",
             "paymentMode" : "free",
             "subscriptionPeriod" : "P1W"
           },
           "localizations" : [
             {
-              "description" : "Premium features subscription",
-              "displayName" : "CSIDAssist+",
+              "description" : "",
+              "displayName" : "",
               "locale" : "en_US"
             }
           ],
           "productID" : "csidassistplus",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "CSIDAssist+",
-          "subscriptionGroupID" : "1D704DF4",
+          "referenceName" : "csidassistplus",
+          "subscriptionGroupID" : "FA5967D2",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
 

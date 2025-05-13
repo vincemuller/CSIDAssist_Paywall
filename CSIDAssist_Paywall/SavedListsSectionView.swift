@@ -13,7 +13,6 @@ struct SavedListsSectionView: View {
     let savedLists: [String] = ["Favorite Safe Foods"]
     let title: String
     
-    @Binding var paywallPresenting: Bool
     
     var body: some View {
         HStack {
@@ -32,7 +31,7 @@ struct SavedListsSectionView: View {
                     ForEach(savedLists, id: \.self) { list in
                         if savedLists.firstIndex(of: list) == 0 {
                             Button {
-                                paywallPresenting = true
+
                             } label: {
                                 HStack {
                                     Group {
@@ -70,5 +69,5 @@ struct SavedListsSectionView: View {
 }
 
 #Preview {
-    SavedListsSectionView(title: "Lists", paywallPresenting: .constant(false))
+    SavedListsSectionView(title: "Lists")
 }

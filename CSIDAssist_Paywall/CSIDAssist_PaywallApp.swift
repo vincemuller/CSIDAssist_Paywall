@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct CSIDAssist_PaywallApp: App {
+    
+    @StateObject var storeKit = StoreKitManager()
+    
     var body: some Scene {
         WindowGroup {
             DashboardScreen()
+                .environmentObject(storeKit)
         }
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 let columns: [GridItem] = [GridItem(.flexible()),
                            GridItem(.flexible()),
                            GridItem(.flexible()),
@@ -18,18 +19,17 @@ let columns: [GridItem] = [GridItem(.flexible()),
                            GridItem(.flexible())]
 
 struct DailyTotalsSectionView: View {
+    @EnvironmentObject var storeKit: StoreKitManager
     
     var title: String
     var calendar = Calendar.current
     var dates: [[String]] = [["SUN","04"],["MON","05"],["TUE","06"],["WED","07"],["THU","08"],["FRI","09"],["SAT","10"]]
     
-    @Binding var paywallPresenting: Bool
-    
     var body: some View {
         HStack {
             Text(title)
                 .font(.system(size: 25, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.1))
+                .foregroundStyle(.white.opacity(storeKit.subscriptionStatus ? 1.0 : 0.1))
             Spacer()
         }
         .padding(.horizontal, 10)
@@ -112,10 +112,12 @@ struct DailyTotalsSectionView: View {
                 Spacer()
             }
             .frame(height: 200)
-            .opacity(0.1)
+            .opacity(storeKit.subscriptionStatus ? 1.0 : 0.1)
             .overlay(alignment: .bottom) {
-                Button {
-                    paywallPresenting = true
+                storeKit.subscriptionStatus ? nil :
+                NavigationLink {
+                    PaywallScreen()
+                        .toolbarRole(.editor)
                 } label: {
                     VStack (spacing: 15) {
                         Image(systemName: "lock.fill")
@@ -125,9 +127,8 @@ struct DailyTotalsSectionView: View {
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundStyle(Color.white)
                     }
+                    .offset(y: 20)
                 }
-                .offset(y: 20)
-
             }
         }
         .padding(.bottom, 10)
@@ -135,5 +136,5 @@ struct DailyTotalsSectionView: View {
 }
 
 #Preview {
-    DailyTotalsSectionView(title: "Daily Totals", paywallPresenting: .constant(false))
+    DailyTotalsSectionView(title: "Daily Totals")
 }

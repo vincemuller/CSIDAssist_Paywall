@@ -8,22 +8,43 @@
 import Foundation
 import StoreKit
 
+
 class StoreKitManager: ObservableObject {
     var subscriptionID: [String] = ["csidassistplus"]
-    var groupID: String = "1D704DF4"
+    var groupID: String = "FA5967D2"
     
     @Published private(set) var subscriptions: [Product] = []
     @Published private(set) var purchasedSubscriptions: [Product] = []
     
     private var updateListenerTask: Task<Void,Error>? = nil
+    var subscriptionStatus: Bool {
+        purchasedSubscriptions.count > 0 ? true : false
+    }
     
     init() {
         
         updateListenerTask = listenForTransactions()
+        
         Task {
             await requestSubscriptions()
-            
             await updateCustomerProductStatus()
+        }
+    }
+    
+    @MainActor
+    func purchase(_ product: Product) async throws -> Transaction? {
+        let result = try await product.purchase()
+        
+        switch result {
+        case .success(let verification):
+            let transaction = try checkVerified(verification)
+            await self.updateCustomerProductStatus()
+            await transaction.finish()
+            return transaction
+        case .userCancelled, .pending:
+            return nil
+        default:
+            return nil
         }
     }
     
@@ -47,12 +68,14 @@ class StoreKitManager: ObservableObject {
     @MainActor
     private func requestSubscriptions() async {
         do {
+            print("asdf")
             let storeSubscriptions = try await Product.products(for: subscriptionID)
-            
+            print(storeSubscriptions.count)
             for product in storeSubscriptions {
                 switch product.type {
                 case .autoRenewable:
                     subscriptions.append(product)
+                    print(product)
                 default:
                     print("Unknown Product")
                 }

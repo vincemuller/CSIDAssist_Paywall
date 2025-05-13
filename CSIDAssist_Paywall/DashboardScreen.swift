@@ -14,12 +14,10 @@ struct HeroColor: Identifiable {
 }
 
 struct DashboardScreen: View {
-    
-    @StateObject private var storeKit = StoreKitManager()
+    @EnvironmentObject var storeKit: StoreKitManager
     
     @State var subscriptionStatus: Bool = false
     @State var searchText: String = ""
-    @State var paywallPresenting: Bool = false
     
     
     var body: some View {
@@ -86,9 +84,6 @@ struct DashboardScreen: View {
                 LinearGradient(colors: [.backgroundColor1,.backgroundColor2,.backgroundColor1], startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
             }
-            .fullScreenCover(isPresented: $paywallPresenting) {
-                PaywallScreen(paywallPresenting: $paywallPresenting)
-            }
         }
     }
     
@@ -96,11 +91,11 @@ struct DashboardScreen: View {
     func sectionView(for section: HomeScreenSections) -> some View {
         switch section {
         case .mealData:
-            DailyTotalsSectionView(title: "Daily Totals", paywallPresenting: $paywallPresenting)
+            DailyTotalsSectionView(title: "Daily Totals")
         case .meals:
             MealLogSectionView(title: section.label)
         case .lists:
-            SavedListsSectionView(title: section.label, paywallPresenting: $paywallPresenting)
+            SavedListsSectionView(title: section.label)
         }
     }
     

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MealLogSectionView: View {
+    @EnvironmentObject var storeKit: StoreKitManager
     
     var title: String
     
@@ -15,7 +16,7 @@ struct MealLogSectionView: View {
         HStack {
             Text(title)
                 .font(.system(size: 25, weight: .semibold))
-                .foregroundStyle(.white.opacity(0.1))
+                .foregroundStyle(.white.opacity(storeKit.subscriptionStatus ? 1.0 : 0.1))
             Spacer()
         }
         .padding(.horizontal, 10)
@@ -40,7 +41,7 @@ struct MealLogSectionView: View {
                 }
             })
             .padding(.horizontal)
-            .opacity(0.1)
+            .opacity(storeKit.subscriptionStatus ? 1.0 : 0.1)
         }
         .padding(.bottom, 10)
     }
