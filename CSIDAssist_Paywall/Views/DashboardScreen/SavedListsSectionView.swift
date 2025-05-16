@@ -13,6 +13,8 @@ struct SavedListsSectionView: View {
     let savedLists: [String] = ["Favorite Safe Foods"]
     let title: String
     
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         HStack {
@@ -21,13 +23,13 @@ struct SavedListsSectionView: View {
                 .foregroundStyle(.white)
             Spacer()
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, width * 0.024)
         ZStack (alignment: .top) {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.textField)
-                .frame(height: 160)
+                .frame(height: height * 0.183)
             ScrollView {
-                VStack (alignment: .leading, spacing: 10) {
+                VStack (alignment: .leading, spacing: width * 0.024) {
                     ForEach(savedLists, id: \.self) { list in
                         if savedLists.firstIndex(of: list) == 0 {
                             Button {
@@ -45,7 +47,7 @@ struct SavedListsSectionView: View {
                             }
                             
                             Divider()
-                                .padding(.leading, 25)
+                                .padding(.leading, width * 0.062)
                         }
                         HStack {
                             Image(systemName: "bookmark")
@@ -59,7 +61,7 @@ struct SavedListsSectionView: View {
                                 .foregroundStyle(Color.white)
                         }
                         Divider()
-                            .padding(.leading, 25)
+                            .padding(.leading, width * 0.062)
                     }
                 }
                 .padding()
@@ -69,5 +71,5 @@ struct SavedListsSectionView: View {
 }
 
 #Preview {
-    SavedListsSectionView(title: "Lists")
+    SavedListsSectionView(title: "Lists", width: 402, height: 863)
 }

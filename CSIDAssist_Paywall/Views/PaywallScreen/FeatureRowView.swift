@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeatureRow: View {
+struct FeatureRowView: View {
     let icon: String
     let title: String
     let iconColor: Color
@@ -21,7 +21,7 @@ struct FeatureRow: View {
                 .padding(.horizontal, 10)
                 .transition(.slide)
             Text(title)
-                .font(.system(size: 16))
+                .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.white)
                     .frame(height: 35)
         }
@@ -29,5 +29,5 @@ struct FeatureRow: View {
 }
 
 #Preview {
-    FeatureRow(icon: "pencil", title: "Custom Meals", iconColor: .iconTeal)
+    FeatureRowView(icon: "pencil", title: "Custom Meals", iconColor: .iconTeal)
 }

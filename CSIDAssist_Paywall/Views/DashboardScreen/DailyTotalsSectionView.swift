@@ -25,6 +25,9 @@ struct DailyTotalsSectionView: View {
     var calendar = Calendar.current
     var dates: [[String]] = [["SUN","04"],["MON","05"],["TUE","06"],["WED","07"],["THU","08"],["FRI","09"],["SAT","10"]]
     
+    let width: CGFloat
+    let height: CGFloat
+    
     var body: some View {
         HStack {
             Text(title)
@@ -32,7 +35,7 @@ struct DailyTotalsSectionView: View {
                 .foregroundStyle(.white.opacity(storeKit.subscriptionStatus ? 1.0 : 0.1))
             Spacer()
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, width * 0.0248)
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.textField)
@@ -42,7 +45,7 @@ struct DailyTotalsSectionView: View {
                         Image(systemName: "chevron.left")
                             .foregroundStyle(.white)
                             .font(.system(size: 14, weight: .semibold))
-                            .padding(.leading, 10)
+                            .padding(.leading, width * 0.0248)
                         ForEach(dates, id: \.self) { date in
                             ZStack {
                                 date[1] != "07" ? nil :
@@ -62,11 +65,11 @@ struct DailyTotalsSectionView: View {
                         Image(systemName: "chevron.right")
                             .foregroundStyle(.white)
                             .font(.system(size: 14, weight: .semibold))
-                            .padding(.trailing, 10)
+                            .padding(.trailing, width * 0.0248)
                     }
                 }
-                .padding(.vertical, 10)
-                .padding(.bottom, 5)
+                .padding(.vertical, height * 0.01144)
+                .padding(.bottom, height * 0.0057)
                 HStack {
                     Spacer()
                     VStack (spacing: 15) {
@@ -74,7 +77,7 @@ struct DailyTotalsSectionView: View {
                             Circle()
                                 .stroke(lineWidth: 7)
                                 .foregroundStyle(Color.iconRed)
-                                .frame(width: 70)
+                                .frame(width: width * 0.174)
                             Text("0.0g")
                                 .font(.system(size: 16, weight: .semibold))
                         }
@@ -87,7 +90,7 @@ struct DailyTotalsSectionView: View {
                             Circle()
                                 .stroke(lineWidth: 7)
                                 .foregroundStyle(Color.iconBlue)
-                                .frame(width: 70)
+                                .frame(width: width * 0.174)
                             Text("0.0g")
                                 .font(.system(size: 16, weight: .semibold))
                         }
@@ -100,7 +103,7 @@ struct DailyTotalsSectionView: View {
                             Circle()
                                 .stroke(lineWidth: 7)
                                 .foregroundStyle(Color.iconOrange)
-                                .frame(width: 70)
+                                .frame(width: width * 0.174)
                             Text("0.0g")
                                 .font(.system(size: 16, weight: .semibold))
                         }
@@ -111,7 +114,7 @@ struct DailyTotalsSectionView: View {
                 }
                 Spacer()
             }
-            .frame(height: 200)
+            .frame(height: height * 0.2288)
             .opacity(storeKit.subscriptionStatus ? 1.0 : 0.1)
             .overlay(alignment: .bottom) {
                 storeKit.subscriptionStatus ? nil :
@@ -127,14 +130,15 @@ struct DailyTotalsSectionView: View {
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundStyle(Color.white)
                     }
-                    .offset(y: 20)
+                    .offset(y: height * 0.02288)
                 }
             }
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, height * 0.01144)
     }
 }
 
 #Preview {
-    DailyTotalsSectionView(title: "Daily Totals")
+    DailyTotalsSectionView(title: "Daily Totals", width: 402, height: 874)
+        .environmentObject(StoreKitManager())
 }

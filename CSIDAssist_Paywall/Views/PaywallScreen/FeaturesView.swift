@@ -24,7 +24,7 @@ struct FeaturesView: View {
     
     var body: some View {
         ForEach(features.indices, id: \.self) { index in
-            FeatureRow(icon: features[index].icon,
+            FeatureRowView(icon: features[index].icon,
                        title: features[index].title,
                        iconColor: features[index].iconColor)
             .frame(width: width * 0.87, alignment: .leading)

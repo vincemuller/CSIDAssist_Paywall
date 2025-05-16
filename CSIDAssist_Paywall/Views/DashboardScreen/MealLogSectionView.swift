@@ -12,6 +12,9 @@ struct MealLogSectionView: View {
     
     var title: String
     
+    let width: CGFloat
+    let height: CGFloat
+    
     var body: some View {
         HStack {
             Text(title)
@@ -19,20 +22,20 @@ struct MealLogSectionView: View {
                 .foregroundStyle(.white.opacity(storeKit.subscriptionStatus ? 1.0 : 0.1))
             Spacer()
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, width * 0.0248)
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.textField)
-                .frame(height: 100)
+                .frame(height: height * 0.1144)
             LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible())], content: {
                 ForEach(MealType.allCases, id: \.id) { meal in
                     VStack (spacing: 5) {
                         Image(meal.label.lowercased())
                             .resizable()
-                            .frame(width: 55, height: 55)
+                            .frame(width: width * 0.1368, height: width * 0.1368)
                             .mask {
                                 Circle()
-                                    .frame(width: 50, height: 50)
+                                    .frame(width: width * 0.1247, height: width * 0.1247)
                             }
                         Text(meal.label)
                             .font(.system(size: 12, weight: .semibold))
@@ -43,10 +46,11 @@ struct MealLogSectionView: View {
             .padding(.horizontal)
             .opacity(storeKit.subscriptionStatus ? 1.0 : 0.1)
         }
-        .padding(.bottom, 10)
+        .padding(.bottom, height * 0.01144)
     }
 }
 
 #Preview {
-    MealLogSectionView(title: "Meal Log")
+    MealLogSectionView(title: "Meal Log", width: 402, height: 874)
+        .environmentObject(StoreKitManager())
 }

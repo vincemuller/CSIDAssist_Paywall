@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PaywallHeaderView: View {
     
-    let text: String
+    let text: String = "Upgrade for access to these tools:"
     let width: CGFloat
     let height: CGFloat
     
@@ -26,5 +26,5 @@ struct PaywallHeaderView: View {
 }
 
 #Preview {
-    PaywallHeaderView(text: "Upgrade for access to these tools:", width: 402, height: 864)
+    PaywallHeaderView(width: 402, height: 864)
 }
