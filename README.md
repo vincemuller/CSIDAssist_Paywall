@@ -47,11 +47,7 @@ This repo is intended as a learning resource or starting point for:
 
 ### Screenshots
 
-<!-- Add screenshots to the Assets folder and update the paths below -->
-<!-- 
-![Paywall Screen](Assets/paywall_screen.png)
-![Subscription Flow](Assets/subscription_flow.png) 
--->
+<img src="./screenshots.png" alt="tasklyst UI Design" width="800" />
 
 ---
 
