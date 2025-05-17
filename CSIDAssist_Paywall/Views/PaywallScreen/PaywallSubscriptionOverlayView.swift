@@ -18,6 +18,7 @@ struct PaywallSubscriptionOverlayView: View {
         ZStack {
             VStack {
                 Text("Get full access for just $4.99/month")
+                    .foregroundStyle(Color.white)
                     .font(.system(size: 14))
                 Button {
                     Task {
@@ -44,6 +45,7 @@ struct PaywallSubscriptionOverlayView: View {
                         }
                 }
                 Text("All Plans | Restore | Terms and Conditions | Privacy")
+                    .foregroundStyle(Color.white)
                     .font(.system(size: 10))
                     .padding(.top, 5)
             }

@@ -37,6 +37,7 @@ struct ReviewView: View {
                     }
                     .padding(.vertical, 1)
                     Text(review.comment)
+                        .foregroundStyle(Color.white)
                         .font(.system(size: 12))
                     Spacer()
                 }

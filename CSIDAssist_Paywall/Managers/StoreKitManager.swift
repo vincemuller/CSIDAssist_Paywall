@@ -68,14 +68,11 @@ class StoreKitManager: ObservableObject {
     @MainActor
     private func requestSubscriptions() async {
         do {
-            print("asdf")
             let storeSubscriptions = try await Product.products(for: subscriptionID)
-            print(storeSubscriptions.count)
             for product in storeSubscriptions {
                 switch product.type {
                 case .autoRenewable:
                     subscriptions.append(product)
-                    print(product)
                 default:
                     print("Unknown Product")
                 }
@@ -110,7 +107,7 @@ class StoreKitManager: ObservableObject {
     
     private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
-        case .unverified(let signedType, let verificationError):
+        case .unverified( _, let verificationError):
             throw verificationError
         case .verified(let signedType):
             return signedType
